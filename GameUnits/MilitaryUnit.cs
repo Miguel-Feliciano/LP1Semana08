@@ -5,26 +5,34 @@ using System.Threading.Tasks;
 
 namespace GameUnits
 {
-    class MilitaryUnit : Unit {
-    public override float Cost => AttackPower + XP;
+    class MilitaryUnit : Unit
+    {
+        public override float Cost => AttackPower + XP;
 
-    public int XP { get; private set; }
-    public int AttackPower { get; private set; }
+        public int XP { get; private set; }
+        public int AttackPower { get; private set; }
 
-    public MilitaryUnit(int health, int movement, int attackPower) 
-    : base(health, movement) {
-        AttackPower = attackPower;
-        XP = 0;
+        public MilitaryUnit(int health, int movement, int attackPower) : base(health, movement)
+        {
+            AttackPower = attackPower;
+            XP = 0;
+        }
+
+        public override int Health
+        {
+            get { return base.Health + XP; }
+            set { base.Health = value; }
+        }
+
+        public void Attack(Unit unit)
+        {
+            XP++;
+            unit.Health -= AttackPower;
+        }
+
+        public override string ToString()
+        {
+            return $"{base.ToString()} AP={AttackPower} XP={XP}";
+        }
     }
-
-    public override int Health {
-        get { return base.Health + XP; }
-        set { base.Health = value; }
-    }
-
-    public void Attack(Unit unit) {
-        XP++;
-        unit.Health -= AttackPower;
-    }
-}
 }
