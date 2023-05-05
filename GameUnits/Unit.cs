@@ -9,7 +9,7 @@ namespace GameUnits
     {
         public abstract float Cost { get; }
         public virtual int Health { get; set; }
-        public int Movement { get; private set; }
+        public virtual int Movement { get; private set; }
         private int _distanceMoved;
 
         public Unit(int health, int movement)
